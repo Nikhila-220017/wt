@@ -1,0 +1,135 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+}
+.navbar{
+    background-color:chocolate;
+text-align:center;
+color:white;
+}
+.banner img{
+    width:100%;
+    height:250px;
+    display:block;
+}
+.categeries{
+    margin-top:5px;
+    padding:10px;
+width:100%;
+height:160px;
+}
+.products{
+width:100%;
+height:600px;
+}
+.offers{
+width:100%;
+height:350px;
+}
+
+.categeries ul li{
+    padding:10px;
+    list-style:none;
+    display:inline-flex;
+    width:100px;
+    height:100px;
+    justify-content:center;
+    align-items:center;
+    margin:15px;
+}
+.categeries ul{
+    position:relative;
+}
+.categeries ul li span{
+    position:absolute;
+    top:128px;
+}
+.categeries ul li:hover{
+transform:scale(1.2);
+}
+.categeries ul li img{
+    width:100px;
+    border:1px double black;
+}
+.products ul li{
+    padding:10px;
+    list-style:none;
+    display:inline-flex;
+    width:200px;
+    height:250px;
+    margin:20px;
+    position:relative;
+}
+.products ul li span{
+    position:absolute;
+    top:250px;
+    margin-left:12px;
+}
+.products ul li:hover{
+transform:scale(1.2);
+}
+.products ul li img{
+width:200px;
+margin-left:10px;
+}
+.banner2 img{
+    margin-top:5px;
+    width:100%;
+    height:250px;
+    display:block;
+}
+.offers ul li{
+    padding:10px;
+list-style:none;
+display:inline-flex;
+width:150px;
+height:130px;
+margin:20px;
+margin-top:10px;
+position:relative;
+}
+.offers ul li span{
+    position:absolute;
+    top:121px;
+    margin-left:10px;
+}
+.offers ul li:hover{
+transform:scale(1.2);
+}
+.offers ul li img{
+    width:100px;
+    margin-left:10px;
+}
+.final{
+    margin-top:10px;
+}
+.header{
+    text-align:center;
+    color:white;
+}
+.main{
+    padding:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:230px;
+}
+.para1{
+    text-align:left;
+    color:white;
+}
+.para2{
+    text-align:center;
+    color:white;
+}
+.para3{
+text-align:right;
+color:white;
+}
+.footer h6{
+    text-align:center;
+    color:white;
+    background-color:blue;
+}
