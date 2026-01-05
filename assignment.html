@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="decoration.css">
     </head>
     <body>
-        <div>
+        
+            <div>
         <div class="navbar">
             <h1>welcome to kumari's store</h1>
         </div>
@@ -217,5 +218,62 @@ Advertise Your Products<br>
 </div>
        </div>
      </div>
+
+<script>
+    let firstname ="nikhila";
+    let lastname ="Dasu";
+    let college ="rgukt"
+    const place ="nuzvid";
+    var year ="2";
+    console.log("collegename:",college);
+    console.log("firstname:",firstname);
+    console.log("lastname:",lastname);
+    console.log("which year you are studing in engeneering:",year);
+    function reassign(){
+        var year=3;
+        console.log("reassigned value:",year);
+    }
+    f=reassign();
+    function place_reassign(){
+        const place="IIIT nuzvid";
+        console.log("reassigned place:",place);
+        k=reassign();
+    }
+    u=place_reassign();
+    function price(){
+        let price=1500;
+            switch(price){
+                case 2000:
+                    console.log("high cost");
+                case 1500:
+                    console.log("average cost");
+                case 500:
+                    console.log("cheap cost");
+            }
+        }
+    k=price();
+    const profile={
+         fname:"Suvartha",
+         lname:"Anaparthi",
+        product:"anarkali",
+        };
+    console.log("fname:",profile.fname);
+    console.log("product:",profile.product);
+    let productname="";
+    while(productname===""){
+        productname=window.prompt("enter which type of product do you want:");
+    }
+    console.log("we will give you options in this ${productname}");
+    for(let price=1500;price<=3000;price++){
+        console.log("our products are in price from:",price);
+    }
+    /*
+    let places=[ongole,darsi,godavari,guntur];
+    places.forEach(display);
+    function display(places){
+        console.log(places);
+    }*/
+   
+</script>
    </body>
  </html>

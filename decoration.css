@@ -114,7 +114,7 @@ transform:scale(1.2);
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:230px;
+    gap:240px;
 }
 .para1{
     text-align:left;
@@ -132,4 +132,10 @@ color:white;
     text-align:center;
     color:white;
     background-color:blue;
+}
+.side{
+    background-color:cadetblue;
+}
+.sidebar{
+    list-style:none;
 }
