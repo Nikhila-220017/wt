@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>BLACK FROCKS</title>
+        <style>
+            .navbar{
+                background-color:aquamarine;
+                text-align:center;
+                border:1px solid black;
+                color:black;
+            }
+            .main{
+                display:flex;
+                padding:20px;
+                border:1px solid black;
+            background-color:skyblue;
+            }
+            .img img{
+                width: 440px;
+                height:440px;
+                padding:30px;
+            }
+            .product{
+                margin-left:50px;
+                padding:20px;
+            }
+            .product ul li{
+                list-style:none;
+                margin-left:30px;
+                font-size:30px;
+                padding:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <h2>Kumari's store</h2>
+        </div>
+        <div class="main">
+            <div class="img">
+                <img src="https://th.bing.com/th/id/OIP.DUIQmXSCKwBD0nEsc3rQKAHaJ4?w=186&h=248&c=7&r=0&o=5&cb=ucfimg2&pid=1.7&ucfimg=1">
+            </div>
+            <div class="product">
+                <h1>product details</h1>
+                <ul>
+                    <li>
+                       <strong> &#8377;price:1500</strong>
+                    </li>
+                    <li>
+                        <strong>Material:cotton</strong>
+                    </li>
+                    <li>
+                        <strong>Brand:black designer froks</strong>
+                    </li>
+                    <li>
+                        <strong>Sizes available:S,XS,M,l,X,XXL</strong>
+                    </li>
+                    <li>
+                        <strong>Discount:40%</strong>
+                    </li>
+                </ul>
+                <button type="button" onclick="added()">add to cart</button>
+                <button type="button" onclick="buy()">Buy Now</button>
+            </div>
+        </div>
+        <script>
+            function added(){
+                alert("your product is added");
+            }
+            function buy(){
+                alert("do you really want to buy this product");
+            }
+        </script>
+    </body>
+</html>
