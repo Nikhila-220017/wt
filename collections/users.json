@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Nikhila",
+        "email": "nikhila@test.com",
+        "password": "$2y$10$j74jzSxeeHBo9.X468AWW.nI02p\/qYls\/02pioMAEMUz\/fg0fQHFO",
+        "role": "customer",
+        "_id": "66e6ab43964f3136f1881ce2",
+        "createdAt": "2026-04-01T07:29:11+00:00"
+    }
+]
