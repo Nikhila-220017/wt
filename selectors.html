@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Selectors Example</title>
+
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+// Basic Selectors
+$("#btn1").click(function(){ $("p").hide(); });
+$("#btn2").click(function(){ $("#demo").hide(); });
+$("#btn3").click(function(){ $(".test").hide(); });
+$("#btn4").click(function(){ $("h1,p").hide(); });
+
+// Hierarchy Selectors
+$("#btn5").click(function(){ $("div p").hide(); });
+$("#btn6").click(function(){ $("div > p").hide(); });
+$("#btn7").click(function(){ $("h2 + p").hide(); });
+$("#btn8").click(function(){ $("h3 ~ p").hide(); });
+
+// Filter Selectors
+$("#btn9").click(function(){ $("p:first").hide(); });
+$("#btn10").click(function(){ $("p:last").hide(); });
+$("#btn11").click(function(){ $("p:eq(1)").hide(); });
+$("#btn12").click(function(){ $("p:even").hide(); });
+$("#btn13").click(function(){ $("p:odd").hide(); });
+$("#btn14").click(function(){ $("p:not(.test)").hide(); });
+
+// Attribute Selectors
+$("#btn15").click(function(){ $("[href]").hide(); });
+$("#btn16").click(function(){ $("[type='text']").hide(); });
+$("#btn17").click(function(){ $("[href^='https']").hide(); });
+$("#btn18").click(function(){ $("[href$='.com']").hide(); });
+$("#btn19").click(function(){ $("[title*='hello']").hide(); });
+
+});
+</script>
+
+</head>
+
+<body>
+
+<h1>Heading</h1>
+<h2>Heading2</h2>
+<h3>Heading3</h3>
+
+<p id="demo">Paragraph 1</p>
+<p class="test">Paragraph 2</p>
+<p>Paragraph 3</p>
+
+<div>
+<p>Paragraph inside div</p>
+</div>
+
+<a href="https://google.com">Google</a><br>
+<input type="text" value="Name"><br>
+<p title="hello world">Title paragraph</p>
+
+<br>
+
+<button id="btn1">element</button>
+<button id="btn2">#id</button>
+<button id="btn3">.class</button>
+<button id="btn4">element,element</button>
+
+<br><br>
+
+<button id="btn5">parent child</button>
+<button id="btn6">parent > child</button>
+<button id="btn7">prev + next</button>
+<button id="btn8">prev ~ siblings</button>
+
+<br><br>
+
+<button id="btn9">:first</button>
+<button id="btn10">:last</button>
+<button id="btn11">:eq()</button>
+<button id="btn12">:even</button>
+<button id="btn13">:odd</button>
+<button id="btn14">:not()</button>
+
+<br><br>
+
+<button id="btn15">[attribute]</button>
+<button id="btn16">[attribute=value]</button>
+<button id="btn17">[attribute^=value]</button>
+<button id="btn18">[attribute$=value]</button>
+<button id="btn19">[attribute*=value]</button>
+
+</body>
+</html>

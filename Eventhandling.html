@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Event Handling Methods</title>
+
+  <!-- Include jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f0f0f0; }
+    h1   { color: #222; text-align: center; }
+    h2   { color: #0066cc; margin-top: 10px; }
+    h3   { color: #333; margin-top: 30px; border-bottom: 2px solid #0066cc; padding-bottom: 5px; }
+
+    .box {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { background: #004999; }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      padding: 8px;
+      width: 220px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      margin: 5px 0;
+      display: block;
+    }
+
+    #hover-box {
+      width: 200px;
+      height: 80px;
+      background: #0066cc;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    #mousedown-box {
+      width: 200px;
+      height: 80px;
+      background: #28a745;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    p.result {
+      color: green;
+      font-weight: bold;
+      min-height: 24px;
+    }
+
+    .section-label {
+      background: #0066cc;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>jQuery Event Handling Methods</h1>
+
+<!-- ============================================================ -->
+<!--               A. MOUSE EVENTS                               -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>A. Mouse Events</h2>
+
+  <!-- 1. click() -->
+  <h3>1. click()</h3>
+  <p>Fires when the user <b>clicks</b> a button once.</p>
+  <button id="btn-click">Click Me</button>
+  <p class="result" id="click-result"></p>
+
+  <!-- 2. dblclick() -->
+  <h3>2. dblclick()</h3>
+  <p>Fires when the user <b>double-clicks</b> a button.</p>
+  <button id="btn-dblclick">Double Click Me</button>
+  <p class="result" id="dblclick-result"></p>
+
+  <!-- 3. mouseenter() -->
+  <h3>3. mouseenter()</h3>
+  <p>Fires when the mouse <b>enters</b> the element area.</p>
+  <button id="btn-mouseenter">Hover Over Me</button>
+  <p class="result" id="mouseenter-result"></p>
+
+  <!-- 4. mouseleave() -->
+  <h3>4. mouseleave()</h3>
+  <p>Fires when the mouse <b>leaves</b> the element area.</p>
+  <button id="btn-mouseleave">Move Mouse Away</button>
+  <p class="result" id="mouseleave-result"></p>
+
+  <!-- 5. hover() -->
+  <h3>5. hover()</h3>
+  <p>Combines mouseenter + mouseleave in one method. Box changes color on hover.</p>
+  <div id="hover-box">Hover Over Me</div>
+  <p class="result" id="hover-result"></p>
+
+  <!-- 6. mousedown() -->
+  <h3>6. mousedown()</h3>
+  <p>Fires the moment the mouse button is <b>pressed down</b>.</p>
+  <div id="mousedown-box">Press Mouse Down</div>
+  <p class="result" id="mousedown-result"></p>
+
+  <!-- 7. mouseup() -->
+  <h3>7. mouseup()</h3>
+  <p>Fires the moment the mouse button is <b>released</b>.</p>
+  <button id="btn-mouseup">Press and Release</button>
+  <p class="result" id="mouseup-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!--               B. KEYBOARD EVENTS                            -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>B. Keyboard Events</h2>
+  <p>Type inside the input box below to see all keyboard events fire.</p>
+
+  <input type="text" id="key-input" placeholder="Type here to test keyboard events...">
+
+  <!-- 8. keydown() -->
+  <h3>8. keydown()</h3>
+  <p>Fires when a key is <b>pressed down</b> (before character appears).</p>
+  <p class="result" id="keydown-result"></p>
+
+  <!-- 9. keypress() -->
+  <h3>9. keypress()</h3>
+  <p>Fires while a key is being <b>pressed</b> (character keys only).</p>
+  <p class="result" id="keypress-result"></p>
+
+  <!-- 10. keyup() -->
+  <h3>10. keyup()</h3>
+  <p>Fires when a key is <b>released</b>.</p>
+  <p class="result" id="keyup-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!--               C. FORM EVENTS                                -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>C. Form Events</h2>
+
+  <form id="myForm">
+
+    <!-- 11. focus() and 12. blur() -->
+    <h3>11. focus() &amp; 12. blur()</h3>
+    <p><b>focus()</b> fires when you click inside the field.<br>
+       <b>blur()</b> fires when you click outside (leave the field).</p>
+
+    <input type="text" id="focus-input" placeholder="Click inside me...">
+    <p class="result" id="focus-result"></p>
+
+    <!-- 13. change() -->
+    <h3>13. change()</h3>
+    <p>Fires when the value of an input or select <b>changes</b> (after leaving the field).</p>
+
+    <input type="text" id="change-input" placeholder="Type and click outside...">
+    <p class="result" id="change-result-input"></p>
+
+    <select id="change-select">
+      <option value="">-- Choose a color --</option>
+      <option value="Red">Red</option>
+      <option value="Blue">Blue</option>
+      <option value="Green">Green</option>
+    </select>
+    <p class="result" id="change-result-select"></p>
+
+    <!-- 14. submit() -->
+    <h3>14. submit()</h3>
+    <p>Fires when the form is <b>submitted</b>. We prevent the page from reloading.</p>
+
+    <input type="text" id="submit-name" placeholder="Enter your name">
+    <input type="email" id="submit-email" placeholder="Enter your email">
+    <br>
+    <button type="submit">Submit Form</button>
+    <p class="result" id="submit-result"></p>
+
+  </form>
+</div>
+
+
+<!-- ============================================================ -->
+<!--               D. GENERAL EVENT METHODS: on() and off()      -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>D. General Event Methods</h2>
+
+  <!-- 15. on() -->
+  <h3>15. on()</h3>
+  <p><b>on()</b> attaches an event to an element. It is the recommended way to bind events in jQuery.</p>
+  <button id="btn-on">Click Me (on)</button>
+  <p class="result" id="on-result"></p>
+
+  <!-- 16. off() -->
+  <h3>16. off()</h3>
+  <p><b>off()</b> removes a previously attached event. After clicking "Remove Event", the button stops working.</p>
+  <button id="btn-off-target">Click Me</button>
+  <button id="btn-remove-event">Remove Event</button>
+  <p class="result" id="off-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!--               jQuery Script                                  -->
+<!-- ============================================================ -->
+<script>
+
+  // =============================================
+  // A. MOUSE EVENTS
+  // =============================================
+
+  // 1. click() — fires on single click
+  $("#btn-click").click(function () {
+    $("#click-result").text("click() fired! Button was clicked.");
+  });
+
+  // 2. dblclick() — fires on double click
+  $("#btn-dblclick").dblclick(function () {
+    $("#dblclick-result").text("dblclick() fired! Button was double clicked.");
+  });
+
+  // 3. mouseenter() — fires when mouse enters the element
+  $("#btn-mouseenter").mouseenter(function () {
+    $("#mouseenter-result").text("mouseenter() fired! Mouse entered the button.");
+  });
+
+  // 4. mouseleave() — fires when mouse leaves the element
+  $("#btn-mouseleave").mouseleave(function () {
+    $("#mouseleave-result").text("mouseleave() fired! Mouse left the button.");
+  });
+
+  // 5. hover() — first function = mouseenter, second = mouseleave
+  $("#hover-box").hover(
+    function () {
+      // Mouse enters — change background color
+      $(this).css("background", "#ff6600");
+      $("#hover-result").text("hover() — mouseenter: Mouse is INSIDE the box.");
+    },
+    function () {
+      // Mouse leaves — restore original color
+      $(this).css("background", "#0066cc");
+      $("#hover-result").text("hover() — mouseleave: Mouse LEFT the box.");
+    }
+  );
+
+  // 6. mousedown() — fires when mouse button is pressed down
+  $("#mousedown-box").mousedown(function () {
+    $(this).css("background", "#c82333");
+    $("#mousedown-result").text("mousedown() fired! Mouse button pressed down.");
+  });
+
+  // 7. mouseup() — fires when mouse button is released
+  $("#btn-mouseup").mouseup(function () {
+    $("#mouseup-result").text("mouseup() fired! Mouse button was released.");
+  });
+
+  // Also restore mousedown-box color on mouseup
+  $("#mousedown-box").mouseup(function () {
+    $(this).css("background", "#28a745");
+  });
+
+
+  // =============================================
+  // B. KEYBOARD EVENTS
+  // =============================================
+
+  // 8. keydown() — fires when a key is pressed down
+  $("#key-input").keydown(function (event) {
+    $("#keydown-result").text("keydown() fired! Key pressed: " + event.key);
+  });
+
+  // 9. keypress() — fires while key is being pressed (character keys only)
+  $("#key-input").keypress(function (event) {
+    $("#keypress-result").text("keypress() fired! Key: " + event.key);
+  });
+
+  // 10. keyup() — fires when the key is released
+  $("#key-input").keyup(function (event) {
+    $("#keyup-result").text("keyup() fired! Key released: " + event.key + " | Current value: " + $(this).val());
+  });
+
+
+  // =============================================
+  // C. FORM EVENTS
+  // =============================================
+
+  // 11. focus() — fires when input is clicked / focused
+  $("#focus-input").focus(function () {
+    $("#focus-result").text("focus() fired! You clicked inside the field.");
+    $(this).css("border", "2px solid #0066cc");
+  });
+
+  // 12. blur() — fires when input loses focus
+  $("#focus-input").blur(function () {
+    $("#focus-result").text("blur() fired! You clicked outside the field.");
+    $(this).css("border", "1px solid #ccc");
+  });
+
+  // 13. change() on text input — fires when value changes and user leaves field
+  $("#change-input").change(function () {
+    $("#change-result-input").text("change() fired! New input value = " + $(this).val());
+  });
+
+  // 13. change() on select dropdown — fires when selected option changes
+  $("#change-select").change(function () {
+    $("#change-result-select").text("change() fired! Selected color = " + $(this).val());
+  });
+
+  // 14. submit() — fires when form is submitted
+  $("#myForm").submit(function (event) {
+    // Prevent the page from reloading
+    event.preventDefault();
+
+    var name  = $("#submit-name").val();
+    var email = $("#submit-email").val();
+
+    if (name === "" || email === "") {
+      $("#submit-result").css("color", "red").text("submit() fired! Please fill in all fields.");
+    } else {
+      $("#submit-result").css("color", "green").text("submit() fired! Name = " + name + " | Email = " + email);
+    }
+  });
+
+
+  // =============================================
+  // D. GENERAL EVENT METHODS
+  // =============================================
+
+  // 15. on() — attach a click event using on()
+  $("#btn-on").on("click", function () {
+    $("#on-result").text("on('click') fired! This event was attached using .on()");
+  });
+
+  // 16. off() — attach event first, then remove it with off()
+
+  // First attach the click event using on()
+  $("#btn-off-target").on("click", function () {
+    $("#off-result").text("on('click') fired! Button is still active.");
+  });
+
+  // This button removes the event from #btn-off-target
+  $("#btn-remove-event").click(function () {
+    $("#btn-off-target").off("click");
+    $("#off-result").text("off('click') called! The button above has NO event now. Try clicking it.");
+  });
+
+</script>
+
+</body>
+</html>

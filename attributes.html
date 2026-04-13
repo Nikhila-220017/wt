@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Attribute Methods</title>
+
+  <!-- Step 1: Include jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f4f4f4; }
+    h1   { color: #333; }
+    h2   { color: #0066cc; margin-top: 40px; }
+    .box { background: #fff; border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+    button { padding: 8px 16px; margin: 5px; background: #0066cc; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #004999; }
+    input[type="text"]     { padding: 8px; width: 200px; border: 1px solid #ccc; border-radius: 4px; }
+    input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+    img  { width: 100px; height: 100px; border: 2px solid #ccc; border-radius: 6px; display: block; margin: 10px 0; }
+    p.result { color: green; font-weight: bold; }
+  </style>
+
+</head>
+<body>
+
+  <h1>jQuery Attribute Methods</h1>
+
+  <!-- ==================== 1. attr() ==================== -->
+  <div class="box">
+    <h2>1. .attr() — Change Image Source</h2>
+
+    <p>This method <b>gets or sets</b> an HTML attribute like src, href, class, etc.</p>
+
+    <!-- The image we will change -->
+    <img id="myImage" src="https://th.bing.com/th/id/OIP.K06LaeO6xuytLUkVoL5EXgHaJ4?w=88&h=108&c=7&qlt=90&bgcl=a8ff0b&r=0&o=6&pid=13.1" alt="fruit">
+
+    <!-- Buttons to change the src attribute -->
+    <button onclick="changeImage()">Change Image</button>
+    <button onclick="getImageSrc()">Get Current src</button>
+
+    <p class="result" id="attrResult"></p>
+  </div>
+
+
+  <!-- ==================== 2. removeAttr() ==================== -->
+  <div class="box">
+    <h2>2. .removeAttr() — Enable a Disabled Input</h2>
+
+    <p>This method <b>removes</b> an attribute from an element completely.</p>
+
+    <!-- Input starts as disabled -->
+    <input type="text" id="myInput" value="I am disabled" disabled>
+    <br><br>
+
+    <button onclick="enableInput()">Enable Input (removeAttr)</button>
+    <button onclick="disableInput()">Disable Input Again</button>
+
+    <p class="result" id="removeResult"></p>
+  </div>
+
+
+  <!-- ==================== 3. prop() ==================== -->
+  <div class="box">
+    <h2>3. .prop() — Check / Uncheck a Checkbox</h2>
+
+    <p>This method <b>gets or sets a DOM property</b> like checked, disabled, selected.</p>
+
+    <!-- Checkbox -->
+    <label>
+      <input type="checkbox" id="myCheckbox">
+      &nbsp; I agree to terms
+    </label>
+    <br><br>
+
+    <button onclick="checkBox()">Check It</button>
+    <button onclick="uncheckBox()">Uncheck It</button>
+    <button onclick="readCheck()">Read Value</button>
+
+    <p class="result" id="propResult"></p>
+  </div>
+
+
+  <!-- ==================== 4. val() ==================== -->
+  <div class="box">
+    <h2>4. .val() — Get / Set Input Value</h2>
+
+    <p>This method <b>gets or sets the value</b> of a form input field.</p>
+
+    <!-- Text input -->
+    <input type="text" id="myName" placeholder="Type your name here...">
+    <br><br>
+
+    <button onclick="getValue()">Get Value</button>
+    <button onclick="setValue()">Set Value</button>
+    <button onclick="clearValue()">Clear</button>
+
+    <p class="result" id="valResult"></p>
+  </div>
+
+
+  <!-- ==================== jQuery Code ==================== -->
+  <script>
+
+    // -------- 1. attr() --------
+
+    function changeImage() {
+      // Set the src attribute of the image
+      $("#myImage").attr("src", "https://th.bing.com/th/id/OIP.aEsR08P8jDYkzS-zMfozdgHaJQ?w=146&h=181&c=7&r=0&o=7&pid=1.7&rm=3");
+      $("#attrResult").text("src attribute changed to kiwi image!");
+    }
+
+    function getImageSrc() {
+      // Get the current src attribute
+      var src = $("#myImage").attr("src");
+      $("#attrResult").text("Current src = " + src);
+    }
+
+
+    // -------- 2. removeAttr() --------
+
+    function enableInput() {
+      // Remove the disabled attribute so input becomes active
+      $("#myInput").removeAttr("disabled");
+      $("#removeResult").text("disabled attribute removed! Now you can type.");
+    }
+
+    function disableInput() {
+      // Add disabled attribute back
+      $("#myInput").attr("disabled", true);
+      $("#removeResult").text("disabled attribute added back.");
+    }
+
+
+    // -------- 3. prop() --------
+
+    function checkBox() {
+      // Set checked property to true
+      $("#myCheckbox").prop("checked", true);
+      $("#propResult").text("prop checked = true  →  Checkbox is ON");
+    }
+
+    function uncheckBox() {
+      // Set checked property to false
+      $("#myCheckbox").prop("checked", false);
+      $("#propResult").text("prop checked = false  →  Checkbox is OFF");
+    }
+
+    function readCheck() {
+      // Read the current checked property value
+      var isChecked = $("#myCheckbox").prop("checked");
+      $("#propResult").text("Current checked value = " + isChecked);
+    }
+
+
+    // -------- 4. val() --------
+
+    function getValue() {
+      // Get whatever the user typed in the input
+      var name = $("#myName").val();
+      if (name === "") {
+        $("#valResult").text("Input is empty! Please type something.");
+      } else {
+        $("#valResult").text("val() returned = " + name);
+      }
+    }
+
+    function setValue() {
+      // Set a value into the input programmatically
+      $("#myName").val("Hello jQuery!");
+      $("#valResult").text("val() set to: Hello jQuery!");
+    }
+
+    function clearValue() {
+      // Clear the input field
+      $("#myName").val("");
+      $("#valResult").text("Input cleared.");
+    }
+
+  </script>
+
+</body>
+</html>

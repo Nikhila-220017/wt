@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Style Manipulation Methods</title>
+
+  <!-- Include jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f0f0f0; }
+    h1   { color: #222; text-align: center; }
+    h2   { color: #0066cc; margin-top: 10px; }
+    h3   { color: #333; margin-top: 30px; border-bottom: 2px solid #0066cc; padding-bottom: 5px; }
+
+    .box {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { background: #004999; }
+
+    p.result {
+      color: green;
+      font-weight: bold;
+      min-height: 24px;
+    }
+
+    /* ---- Classes used by addClass / removeClass / toggleClass / hasClass ---- */
+
+    .highlight {
+      background-color: #fff176;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    .text-danger {
+      color: #cc0000;
+      font-weight: bold;
+    }
+
+    .text-success {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .big-text {
+      font-size: 26px;
+    }
+
+    .bordered {
+      border: 3px solid #0066cc;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    /* Dark theme classes for toggleClass demo */
+    .dark-theme {
+      background-color: #222;
+      color: #f0f0f0;
+      border-color: #555;
+    }
+
+    .dark-theme h3 {
+      color: #7eb3ff;
+      border-color: #555;
+    }
+
+    /* Demo text boxes */
+    #css-box {
+      width: 220px;
+      height: 80px;
+      background: #0066cc;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    #demo-para {
+      font-size: 16px;
+      padding: 8px;
+      display: inline-block;
+    }
+
+    #toggle-para {
+      font-size: 16px;
+      padding: 8px;
+      display: inline-block;
+    }
+
+    #has-para {
+      font-size: 16px;
+      padding: 8px;
+      display: inline-block;
+    }
+
+    #theme-box {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 10px 0;
+      transition: all 0.3s;
+    }
+
+  </style>
+
+</head>
+<body>
+
+<h1>jQuery Style Manipulation Methods</h1>
+
+
+<!-- ============================================================ -->
+<!-- 1. css()                                                      -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>1. css()</h2>
+  <p>Directly <b>gets or sets</b> inline CSS properties on an element.</p>
+
+  <!-- Colored box we will style -->
+  <div id="css-box">Style Me!</div>
+
+  <h3>Change Colors</h3>
+  <button id="btn-red">Red Background</button>
+  <button id="btn-green">Green Background</button>
+  <button id="btn-blue">Blue Background</button>
+  <button id="btn-reset-css">Reset</button>
+  <p class="result" id="css-color-result"></p>
+
+  <h3>Change Font Size</h3>
+  <button id="btn-big">Big Text</button>
+  <button id="btn-small">Small Text</button>
+  <p class="result" id="css-font-result"></p>
+
+  <h3>Get a CSS Property</h3>
+  <button id="btn-get-css">Get Background Color</button>
+  <p class="result" id="css-get-result"></p>
+
+  <h3>Set Multiple CSS Properties at Once</h3>
+  <button id="btn-multi-css">Apply Multiple Styles</button>
+  <p class="result" id="css-multi-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!-- 2. addClass()                                                 -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>2. addClass()</h2>
+  <p><b>Adds</b> one or more CSS classes to an element.</p>
+
+  <p id="add-para" style="font-size:16px; padding:8px; display:inline-block;">
+    I am a plain paragraph. Add classes to style me!
+  </p>
+  <br>
+
+  <h3>Add Highlight Effect</h3>
+  <button id="btn-add-highlight">Add .highlight</button>
+  <p class="result" id="add-highlight-result"></p>
+
+  <h3>Add Text Color Class</h3>
+  <button id="btn-add-danger">Add .text-danger</button>
+  <button id="btn-add-success">Add .text-success</button>
+  <p class="result" id="add-color-result"></p>
+
+  <h3>Add Multiple Classes at Once</h3>
+  <button id="btn-add-multi">Add .big-text + .bordered</button>
+  <p class="result" id="add-multi-result"></p>
+
+  <h3>Reset paragraph</h3>
+  <button id="btn-reset-add">Reset All Classes</button>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!-- 3. removeClass()                                              -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>3. removeClass()</h2>
+  <p><b>Removes</b> one or more CSS classes from an element.</p>
+
+  <!-- Start with all classes applied -->
+  <p id="remove-para" class="highlight text-danger big-text bordered"
+     style="display:inline-block; padding:8px;">
+    I start with multiple classes. Remove them one by one!
+  </p>
+  <br>
+
+  <h3>Remove Individual Classes</h3>
+  <button id="btn-rm-highlight">Remove .highlight</button>
+  <button id="btn-rm-danger">Remove .text-danger</button>
+  <button id="btn-rm-big">Remove .big-text</button>
+  <button id="btn-rm-bordered">Remove .bordered</button>
+  <p class="result" id="remove-result"></p>
+
+  <h3>Remove All Classes at Once</h3>
+  <button id="btn-rm-all">Remove ALL Classes</button>
+  <p class="result" id="remove-all-result"></p>
+
+  <h3>Restore Classes</h3>
+  <button id="btn-restore">Restore All Classes</button>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!-- 4. toggleClass()                                              -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>4. toggleClass()</h2>
+  <p><b>Adds</b> the class if it is absent, <b>removes</b> it if it is present. Works like a switch.</p>
+
+  <p id="toggle-para" style="font-size:16px; padding:8px; display:inline-block;">
+    Click the buttons to toggle classes on and off!
+  </p>
+  <br>
+
+  <h3>Toggle Highlight</h3>
+  <button id="btn-toggle-highlight">Toggle .highlight</button>
+  <p class="result" id="toggle-highlight-result"></p>
+
+  <h3>Toggle Text Color</h3>
+  <button id="btn-toggle-danger">Toggle .text-danger</button>
+  <p class="result" id="toggle-danger-result"></p>
+
+  <h3>Toggle Theme (Dark / Light)</h3>
+  <p>Click the button to switch the box between light and dark theme.</p>
+  <div id="theme-box">
+    <h3>Theme Box</h3>
+    <p>This box switches between light and dark mode using toggleClass().</p>
+    <button id="btn-toggle-theme">Toggle Dark Theme</button>
+  </div>
+  <p class="result" id="toggle-theme-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!-- 5. hasClass()                                                 -->
+<!-- ============================================================ -->
+<div class="box">
+  <h2>5. hasClass()</h2>
+  <p><b>Checks</b> if an element has a specific class. Returns <b>true</b> or <b>false</b>.</p>
+
+  <p id="has-para" style="font-size:16px; padding:8px; display:inline-block;">
+    I am a paragraph. Add or remove a class, then check!
+  </p>
+  <br>
+
+  <h3>Add / Remove Class First</h3>
+  <button id="btn-has-add">Add .highlight</button>
+  <button id="btn-has-remove">Remove .highlight</button>
+  <p class="result" id="has-add-result"></p>
+
+  <h3>Check with hasClass()</h3>
+  <button id="btn-has-check">Does it have .highlight?</button>
+  <p class="result" id="has-result"></p>
+
+  <h3>Conditional Action Using hasClass()</h3>
+  <p>If the paragraph has .highlight, apply .text-success. Otherwise apply .text-danger.</p>
+  <button id="btn-has-condition">Apply Condition</button>
+  <p class="result" id="has-condition-result"></p>
+
+</div>
+
+
+<!-- ============================================================ -->
+<!-- jQuery Script                                                 -->
+<!-- ============================================================ -->
+<script>
+
+  // ================================================
+  // 1. css()
+  // ================================================
+
+  // Change background color — single property
+  $("#btn-red").click(function () {
+    $("#css-box").css("background-color", "#cc0000");
+    $("#css-color-result").text("css('background-color', '#cc0000') applied — Red!");
+  });
+
+  $("#btn-green").click(function () {
+    $("#css-box").css("background-color", "#28a745");
+    $("#css-color-result").text("css('background-color', '#28a745') applied — Green!");
+  });
+
+  $("#btn-blue").click(function () {
+    $("#css-box").css("background-color", "#0066cc");
+    $("#css-color-result").text("css('background-color', '#0066cc') applied — Blue!");
+  });
+
+  $("#btn-reset-css").click(function () {
+    $("#css-box").css({ "background-color": "#0066cc", "font-size": "16px", "color": "#fff" });
+    $("#css-color-result").text("Reset to original styles.");
+    $("#css-font-result").text("");
+  });
+
+  // Change font size
+  $("#btn-big").click(function () {
+    $("#css-box").css("font-size", "26px");
+    $("#css-font-result").text("css('font-size', '26px') applied — Big Text!");
+  });
+
+  $("#btn-small").click(function () {
+    $("#css-box").css("font-size", "12px");
+    $("#css-font-result").text("css('font-size', '12px') applied — Small Text!");
+  });
+
+  // GET a CSS property value
+  $("#btn-get-css").click(function () {
+    var bgColor = $("#css-box").css("background-color");
+    $("#css-get-result").text("css('background-color') returned = " + bgColor);
+  });
+
+  // Set MULTIPLE CSS properties at once using an object {}
+  $("#btn-multi-css").click(function () {
+    $("#css-box").css({
+      "background-color": "#6f42c1",
+      "color": "#fff",
+      "font-size": "20px",
+      "border-radius": "20px",
+      "border": "3px solid #000"
+    });
+    $("#css-multi-result").text("Multiple css properties applied at once!");
+  });
+
+
+  // ================================================
+  // 2. addClass()
+  // ================================================
+
+  // Add .highlight class
+  $("#btn-add-highlight").click(function () {
+    $("#add-para").addClass("highlight");
+    $("#add-highlight-result").text("addClass('highlight') called — yellow highlight added!");
+  });
+
+  // Add color classes
+  $("#btn-add-danger").click(function () {
+    $("#add-para").addClass("text-danger");
+    $("#add-color-result").text("addClass('text-danger') called — red text added!");
+  });
+
+  $("#btn-add-success").click(function () {
+    $("#add-para").addClass("text-success");
+    $("#add-color-result").text("addClass('text-success') called — green text added!");
+  });
+
+  // Add multiple classes in one call
+  $("#btn-add-multi").click(function () {
+    $("#add-para").addClass("big-text bordered");
+    $("#add-multi-result").text("addClass('big-text bordered') called — two classes added at once!");
+  });
+
+  // Reset all classes
+  $("#btn-reset-add").click(function () {
+    $("#add-para").removeClass();
+    $("#add-highlight-result").text("All classes removed. Paragraph reset.");
+    $("#add-color-result").text("");
+    $("#add-multi-result").text("");
+  });
+
+
+  // ================================================
+  // 3. removeClass()
+  // ================================================
+
+  // Remove individual classes one by one
+  $("#btn-rm-highlight").click(function () {
+    $("#remove-para").removeClass("highlight");
+    $("#remove-result").text("removeClass('highlight') called — yellow background removed!");
+  });
+
+  $("#btn-rm-danger").click(function () {
+    $("#remove-para").removeClass("text-danger");
+    $("#remove-result").text("removeClass('text-danger') called — red color removed!");
+  });
+
+  $("#btn-rm-big").click(function () {
+    $("#remove-para").removeClass("big-text");
+    $("#remove-result").text("removeClass('big-text') called — large font removed!");
+  });
+
+  $("#btn-rm-bordered").click(function () {
+    $("#remove-para").removeClass("bordered");
+    $("#remove-result").text("removeClass('bordered') called — border removed!");
+  });
+
+  // Remove ALL classes at once (no argument = removes everything)
+  $("#btn-rm-all").click(function () {
+    $("#remove-para").removeClass();
+    $("#remove-all-result").text("removeClass() with no argument — ALL classes removed at once!");
+  });
+
+  // Restore all classes
+  $("#btn-restore").click(function () {
+    $("#remove-para").addClass("highlight text-danger big-text bordered");
+    $("#remove-result").text("All classes restored.");
+    $("#remove-all-result").text("");
+  });
+
+
+  // ================================================
+  // 4. toggleClass()
+  // ================================================
+
+  // Toggle .highlight on/off
+  $("#btn-toggle-highlight").click(function () {
+    $("#toggle-para").toggleClass("highlight");
+    var hasIt = $("#toggle-para").hasClass("highlight");
+    $("#toggle-highlight-result").text("toggleClass('highlight') — class is now: " + (hasIt ? "ON" : "OFF"));
+  });
+
+  // Toggle .text-danger on/off
+  $("#btn-toggle-danger").click(function () {
+    $("#toggle-para").toggleClass("text-danger");
+    var hasIt = $("#toggle-para").hasClass("text-danger");
+    $("#toggle-danger-result").text("toggleClass('text-danger') — class is now: " + (hasIt ? "ON" : "OFF"));
+  });
+
+  // Toggle dark theme on the theme box
+  $("#btn-toggle-theme").click(function () {
+    $("#theme-box").toggleClass("dark-theme");
+    var isDark = $("#theme-box").hasClass("dark-theme");
+    $("#toggle-theme-result").text("toggleClass('dark-theme') — Theme is now: " + (isDark ? "DARK" : "LIGHT"));
+  });
+
+
+  // ================================================
+  // 5. hasClass()
+  // ================================================
+
+  // Add class to test paragraph
+  $("#btn-has-add").click(function () {
+    $("#has-para").addClass("highlight");
+    $("#has-add-result").text("addClass('highlight') called — class added.");
+  });
+
+  // Remove class from test paragraph
+  $("#btn-has-remove").click(function () {
+    $("#has-para").removeClass("highlight");
+    $("#has-add-result").text("removeClass('highlight') called — class removed.");
+  });
+
+  // Check with hasClass() — returns true or false
+  $("#btn-has-check").click(function () {
+    var result = $("#has-para").hasClass("highlight");
+    if (result) {
+      $("#has-result").css("color", "green").text("hasClass('highlight') = true — YES, the class is present!");
+    } else {
+      $("#has-result").css("color", "red").text("hasClass('highlight') = false — NO, the class is NOT present.");
+    }
+  });
+
+  // Use hasClass() to make a conditional decision
+  $("#btn-has-condition").click(function () {
+    if ($("#has-para").hasClass("highlight")) {
+      // Has highlight — apply success color
+      $("#has-para").addClass("text-success").removeClass("text-danger");
+      $("#has-condition-result").text("hasClass returned true → added .text-success (green)");
+    } else {
+      // No highlight — apply danger color
+      $("#has-para").addClass("text-danger").removeClass("text-success");
+      $("#has-condition-result").text("hasClass returned false → added .text-danger (red)");
+    }
+  });
+
+</script>
+
+</body>
+</html>

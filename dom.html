@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery DOM Traversing</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2   { color: #0066cc; margin-top: 30px; border-bottom: 2px solid #0066cc; padding-bottom: 4px; }
+    .box { background: #fff; border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
+    button { padding: 7px 14px; margin: 3px; background: #0066cc; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    button:hover { background: #004999; }
+    .reset { background: #888; }
+    .result { color: green; font-weight: bold; font-size: 13px; margin-top: 6px; }
+    .hl { background: #fff176 !important; border: 2px solid orange !important; font-weight: bold; }
+
+    /* Parent Tree */
+    #great { background: #e8f5e9; border: 2px solid #aaa; padding: 10px; border-radius: 6px; display: inline-block; }
+    #grand { background: #e3f2fd; border: 2px solid #aaa; padding: 10px; border-radius: 6px; margin: 6px; display: inline-block; }
+    #par   { background: #fff9c4; border: 2px solid #aaa; padding: 10px; border-radius: 6px; margin: 6px; display: inline-block; }
+    #child-el { background: #fce4ec; border: 2px solid #aaa; padding: 8px 14px; border-radius: 4px; margin: 6px; display: inline-block; }
+
+    /* Sibling Row */
+    .row { display: flex; gap: 8px; margin: 10px 0; }
+    .row div { padding: 10px 16px; background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; font-size: 14px; }
+    #sib3 { background: #fff9c4; border-color: orange; font-weight: bold; }
+
+    /* Filter List */
+    .flist { list-style: none; padding: 0; }
+    .flist li { display: inline-block; padding: 8px 14px; margin: 4px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 4px; }
+    .flist li.special { background: #fce4ec; border-color: #f48fb1; }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center; color:#222;">jQuery DOM Traversing Methods</h1>
+
+<!-- ===== A. PARENT TRAVERSAL ===== -->
+<h2>A. Parent Traversal</h2>
+<div class="box">
+  <!-- Tree Structure -->
+  <div id="great">div#great-grandparent
+    <div id="grand">div#grandparent
+      <div id="par">div#parent
+        <div id="child-el">⭐ START (#child-el)</div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <button onclick="r();$('#child-el').parent().addClass('hl');$('#pr').text('parent() → div#parent highlighted')">parent()</button>
+  <button onclick="r();$('#child-el').parents('div').addClass('hl');$('#pr').text('parents() → ALL ancestor divs highlighted')">parents()</button>
+  <button onclick="r();$('#child-el').parentsUntil('#great').addClass('hl');$('#pr').text('parentsUntil(#great) → parent + grandparent highlighted (great excluded)')">parentsUntil(#great)</button>
+  <button class="reset" onclick="r();$('#pr').text('')">Reset</button>
+  <p class="result" id="pr"></p>
+</div>
+
+<!-- ===== B. CHILDREN TRAVERSAL ===== -->
+<h2>B. Children Traversal</h2>
+<div class="box">
+  <div id="myparent" style="background:#f0f7ff;border:2px dashed #0066cc;padding:12px;border-radius:6px;display:inline-block;">
+    div#myparent
+    <div class="child-item" style="display:inline-block;padding:8px 14px;margin:4px;background:#fff;border:1px solid #90caf9;border-radius:4px;">
+      Child Div 1 <span style="color:#0066cc;font-size:12px;">[span inside]</span>
+    </div>
+    <div class="child-item" style="display:inline-block;padding:8px 14px;margin:4px;background:#fff;border:1px solid #90caf9;border-radius:4px;">
+      Child Div 2 <span style="color:#0066cc;font-size:12px;">[span inside]</span>
+    </div>
+    <p style="display:inline-block;margin:4px;padding:8px 14px;background:#fff;border:1px solid #ccc;border-radius:4px;">Child &lt;p&gt;</p>
+  </div>
+  <br><br>
+  <button onclick="cr();$('#myparent').children().addClass('hl');$('#cr').text('children() → direct children only (divs + p). Spans inside NOT included.')">children()</button>
+  <button onclick="cr();$('#myparent').find('span').addClass('hl');$('#cr').text('find(span) → finds ALL spans deep inside')">find('span')</button>
+  <button class="reset" onclick="cr();$('#cr').text('')">Reset</button>
+  <p class="result" id="cr"></p>
+</div>
+
+<!-- ===== C. SIBLING TRAVERSAL ===== -->
+<h2>C. Sibling Traversal</h2>
+<div class="box">
+  <div class="row">
+    <div id="sib1">Box 1</div>
+    <div id="sib2">Box 2</div>
+    <div id="sib3">⭐ Box 3 (START)</div>
+    <div id="sib4">Box 4</div>
+    <div id="sib5">Box 5</div>
+    <div id="sib6">Box 6</div>
+  </div>
+  <button onclick="sr();$('#sib3').siblings().addClass('hl');$('#sr').text('siblings() → Box 1,2,4,5,6 highlighted')">siblings()</button>
+  <button onclick="sr();$('#sib3').next().addClass('hl');$('#sr').text('next() → Box 4 only')">next()</button>
+  <button onclick="sr();$('#sib3').nextAll().addClass('hl');$('#sr').text('nextAll() → Box 4,5,6')">nextAll()</button>
+  <button onclick="sr();$('#sib3').nextUntil('#sib6').addClass('hl');$('#sr').text('nextUntil(#sib6) → Box 4,5 (stops before 6)')">nextUntil(#sib6)</button>
+  <button onclick="sr();$('#sib3').prev().addClass('hl');$('#sr').text('prev() → Box 2 only')">prev()</button>
+  <button onclick="sr();$('#sib3').prevAll().addClass('hl');$('#sr').text('prevAll() → Box 1,2')">prevAll()</button>
+  <button onclick="sr();$('#sib3').prevUntil('#sib1').addClass('hl');$('#sr').text('prevUntil(#sib1) → Box 2 (stops before 1)')">prevUntil(#sib1)</button>
+  <button class="reset" onclick="sr();$('#sr').text('')">Reset</button>
+  <p class="result" id="sr"></p>
+</div>
+
+<!-- ===== D. FILTERING METHODS ===== -->
+<h2>D. Filtering Methods</h2>
+<div class="box">
+  <ul class="flist" id="fl">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li class="special">Item 3 (special)</li>
+    <li>Item 4</li>
+    <li class="special">Item 5 (special)</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+  </ul>
+  <button onclick="fr();$('#fl li').first().addClass('hl');$('#fr').text('first() → Item 1')">first()</button>
+  <button onclick="fr();$('#fl li').last().addClass('hl');$('#fr').text('last() → Item 7')">last()</button>
+  <button onclick="fr();$('#fl li').eq(2).addClass('hl');$('#fr').text('eq(2) → Item 3 (index 2)')">eq(2)</button>
+  <button onclick="fr();$('#fl li').filter('.special').addClass('hl');$('#fr').text('filter(.special) → Item 3 and Item 5 only')">filter(.special)</button>
+  <button onclick="fr();$('#fl li').not('.special').addClass('hl');$('#fr').text('not(.special) → all items EXCEPT special ones')">not(.special)</button>
+  <button class="reset" onclick="fr();$('#fr').text('')">Reset</button>
+  <p class="result" id="fr"></p>
+</div>
+
+<script>
+  function r()  { $("#great *").removeClass("hl"); }   // reset parent tree
+  function cr() { $("#myparent, #myparent *").removeClass("hl"); }  // reset children
+  function sr() { $(".row div").removeClass("hl"); }   // reset siblings
+  function fr() { $("#fl li").removeClass("hl"); }     // reset filter list
+</script>
+
+</body>
+</html>

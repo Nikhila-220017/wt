@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Effects</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2   { color: #0066cc; margin-top: 25px; border-bottom: 2px solid #0066cc; padding-bottom: 4px; }
+    .box { background: #fff; border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
+    button { padding: 7px 14px; margin: 3px; background: #0066cc; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    button:hover { background: #004999; }
+    .result { color: green; font-weight: bold; font-size: 13px; margin-top: 6px; }
+
+    /* Demo boxes */
+    #show-box   { width: 150px; height: 60px; background: #42a5f5; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0; font-weight: bold; }
+    #fade-box   { width: 150px; height: 60px; background: #ab47bc; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0; font-weight: bold; }
+    #slide-box  { width: 150px; background: #26a69a; color: #fff; padding: 15px; border-radius: 6px; margin: 10px 0; font-weight: bold; text-align: center; }
+    #anim-box   { width: 100px; height: 60px; background: #ef5350; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0; font-weight: bold; position: relative; }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center; color:#222;">jQuery Effects</h1>
+
+<!-- ===== A. BASIC EFFECTS ===== -->
+<h2>A. Basic Effects</h2>
+<div class="box">
+  <div id="show-box">I am visible!</div>
+  <button onclick="$('#show-box').hide(500);$('#br').text('hide() — box is hidden with 500ms speed')">hide()</button>
+  <button onclick="$('#show-box').show(500);$('#br').text('show() — box is visible again with 500ms speed')">show()</button>
+  <button onclick="$('#show-box').toggle(500);$('#br').text('toggle() — switches between show and hide')">toggle()</button>
+  <p class="result" id="br"></p>
+</div>
+
+<!-- ===== B. FADE EFFECTS ===== -->
+<h2>B. Fade Effects</h2>
+<div class="box">
+  <div id="fade-box">Fade Me!</div>
+  <button onclick="$('#fade-box').fadeOut(800);$('#fr').text('fadeOut() — fades out slowly')">fadeOut()</button>
+  <button onclick="$('#fade-box').fadeIn(800);$('#fr').text('fadeIn() — fades in slowly')">fadeIn()</button>
+  <button onclick="$('#fade-box').fadeToggle(800);$('#fr').text('fadeToggle() — toggles fade in/out')">fadeToggle()</button>
+  <button onclick="$('#fade-box').fadeTo(800, 0.3);$('#fr').text('fadeTo(800, 0.3) — fades to 30% opacity')">fadeTo(0.3)</button>
+  <button onclick="$('#fade-box').fadeTo(800, 1);$('#fr').text('fadeTo(800, 1) — fades back to 100% opacity')">fadeTo(1.0)</button>
+  <p class="result" id="fr"></p>
+</div>
+
+<!-- ===== C. SLIDE EFFECTS ===== -->
+<h2>C. Slide Effects</h2>
+<div class="box">
+  <div id="slide-box">Slide Me!</div>
+  <button onclick="$('#slide-box').slideUp(600);$('#sr').text('slideUp() — slides up and hides')">slideUp()</button>
+  <button onclick="$('#slide-box').slideDown(600);$('#sr').text('slideDown() — slides down and shows')">slideDown()</button>
+  <button onclick="$('#slide-box').slideToggle(600);$('#sr').text('slideToggle() — toggles slide up/down')">slideToggle()</button>
+  <p class="result" id="sr"></p>
+</div>
+
+<!-- ===== D. CUSTOM ANIMATION ===== -->
+<h2>D. Custom Animation — animate()</h2>
+<div class="box">
+  <div id="anim-box">Box</div>
+
+  <!-- Move horizontally -->
+  <p style="font-size:13px; color:#555; margin:6px 0;"><b>Move horizontally:</b></p>
+  <button onclick="$('#anim-box').animate({left:'200px'},600);$('#ar').text('animate({left:200px}) — box moved right')">Move Right</button>
+  <button onclick="$('#anim-box').animate({left:'0px'},600);$('#ar').text('animate({left:0px}) — box moved back')">Move Left</button>
+
+  <!-- Change opacity -->
+  <p style="font-size:13px; color:#555; margin:6px 0;"><b>Change opacity:</b></p>
+  <button onclick="$('#anim-box').animate({opacity:0.2},600);$('#ar').text('animate({opacity:0.2}) — box is 20% visible')">Opacity 20%</button>
+  <button onclick="$('#anim-box').animate({opacity:1},600);$('#ar').text('animate({opacity:1}) — box is fully visible')">Opacity 100%</button>
+
+  <!-- Resize element -->
+  <p style="font-size:13px; color:#555; margin:6px 0;"><b>Resize element:</b></p>
+  <button onclick="$('#anim-box').animate({width:'250px', height:'100px'},600);$('#ar').text('animate({width:250px, height:100px}) — box resized bigger')">Resize Big</button>
+  <button onclick="$('#anim-box').animate({width:'100px', height:'60px'},600);$('#ar').text('animate({width:100px, height:60px}) — box back to original')">Resize Small</button>
+
+  <!-- All together -->
+  <p style="font-size:13px; color:#555; margin:6px 0;"><b>All at once:</b></p>
+  <button style="background:#e65100;" onclick="
+    $('#anim-box').animate({left:'200px', opacity:0.5, width:'200px', height:'90px'}, 800);
+    $('#ar').text('animate() — move + opacity + resize all at once!')
+  ">Animate All</button>
+  <button onclick="$('#anim-box').animate({left:'0px', opacity:1, width:'100px', height:'60px'},600);$('#ar').text('Reset animation')">Reset</button>
+
+  <p class="result" id="ar"></p>
+</div>
+
+</body>
+</html>
