@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jsp for beginners</title>
+
+    <style>
+        .blueStyle { color: blue; }
+        .redStyle { color: red;}
+     
+    </style>
+</head>
+
+<body>
+     
+    <h1>first jsp</h1>
+
+    <!-- Auto content change -->
+    <p id="content">text changes using jsp</p>
+
+    <!-- Style paragraph -->
+    <p id="stylepara">This is style paragraph</p>
+
+    <!-- Style Control Buttons -->
+    <button onclick="changeStyle()">Change Style</button>
+    <button onclick="toggleStyle()">Toggle Style</button>
+
+    <br><br>
+
+    <!-- Hover Button -->
+    <button id="eventButton">Hover Me</button>
+
+    <br><br>
+
+    <!-- Add/Remove Dynamic Content -->
+    <button onclick="addContent()">Add Content</button>
+    <button onclick="removeContent()">Remove Content</button>
+
+    <div id="dynamicArea"></div>
+
+    <br><br>
+
+    <!-- Simple Form -->
+    <form id="myForm">
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <br><br>
+
+    <!-- Interactive Form -->
+    <form id="userForm">
+        <input type="text" id="nameField" placeholder="Enter your name">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+
+        //task1 variables
+        var collegeName = "RGUKT";
+        let year = 2025;
+        const director = "amarendra kumar";
+        console.log("college name", collegeName);
+        console.log("year:", year);
+        console.log("director", director);
+
+        //task2 Functions
+        function greet() {
+            console.log("welcome to jsp");
+        }
+        greet();
+
+        const add = (a, b) => a + b;
+        const subtract = (a, b) => a - b;
+        console.log("addition (5+3):", add(5, 3));
+        console.log("subtractiom (5-3):", subtract(5, 3));
+
+        //task3 built in functions
+        alert("welcome to our website");
+        let username = prompt("enter your name:");
+        alert("hello, " + username + "!");
+        console.log("user entered:", username);
+
+        //task4 manipulate HTML content
+        document.getElementById("content").innerHTML = "content changed using jsp";
+
+        function addContent() {
+            let area = document.getElementById("dynamicArea");
+            area.innerHTML = "<p id='extra'>This content was added dynamically</p>";
+        }
+
+        function removeContent() {
+            let extra = document.getElementById("extra");
+            if (extra) extra.remove();
+        }
+
+        //task5 styling with js
+        function changeStyle() {
+            let p = document.getElementById("stylepara");
+            p.style.color = "green";
+            p.style.fontSize = "20px";
+            p.style.backgroundColor = "lightblue";
+        }
+
+        function toggleStyle() {
+            let p = document.getElementById("stylepara");
+            p.classList.toggle("blueStyle");
+            p.classList.toggle("redStyle");
+        }
+
+        //Hover Effect Button
+        let btn = document.getElementById("eventButton");
+
+        btn.onmouseover = () => btn.style.backgroundColor = "lightgreen";
+        btn.onmouseout = () => btn.style.backgroundColor = "";
+
+        //Form 1 submit
+        document.getElementById("myForm").onsubmit = function (e) {
+            e.preventDefault();
+            console.log("form submitted");
+        };
+
+        //task 7 interactive webpage
+        function greetUser() {
+            let name = prompt("what is your name?");
+            alert("hello, " + name + " welcome!");
+        }
+
+        //Form 2 submit
+        document.getElementById("userForm").onsubmit = function (e) {
+            e.preventDefault();
+            let nameInput = document.getElementById("nameField").value;
+
+            if (nameInput === "") {
+                alert("Name field cannot be empty!");
+            } else {
+                alert("form submitted successfully");
+            }
+        };
+
+    </script>
+</body>
+</html>
